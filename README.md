@@ -1,8 +1,8 @@
 # 👋 Hey, I'm Rayyan Habeeb! 
 
-🎓 M.S. Computer Science** @ University of South Florida\
-✨ AI Graduate Research Assistant @ USF\
-🧠 AI Engineer | Software development | Data Engineer\
+🎓 **M.S. Computer Science** @ University of South Florida\
+✨ **AI Graduate Research Assistant** @ USF\
+🧠 Focus on AI Engineering | Software development | Data Engineering\
 🚀 Building AI-powered assistants, retrieval systems, and multimodal applications\
 📍 Tampa, Florida, United States
 
