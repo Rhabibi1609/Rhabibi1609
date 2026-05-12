@@ -14,32 +14,22 @@ I'm a graduate Computer Science student passionate about building production-gra
 ### 🚄 The VRAI Ecosystem (Virtual Railroad Assistant Instructor)
 
 **[VRAI-RAG (Backend)](https://github.com/Rhabibi1609/VRAI-RAG)**
-A high-performance RAG backend designed for railroad operations training.
-* **Hybrid Search:** Combines Qdrant vector search with BM25 keyword retrieval using Reciprocal Rank Fusion (RRF).
-* **Ingestion Pipeline:** Uses GPU-accelerated OCR and structure-aware splitting to process complex technical manuals.
-* **Advanced Logic:** Features domain-specific acronym expansion and a fallback Chain-of-Thought (CoT) reasoning loop.
+A high-performance RAG backend designed for railroad operations training. Implemented a hybrid search by combining Qdrant vector search with BM25 keyword retrieval using Reciprocal Rank Fusion (RRF). Ingestion Pipeline via GPU-accelerated OCR and structure-aware splitting to process complex technical manuals. Features domain-specific acronym expansion and a fallback Chain-of-Thought (CoT) reasoning loop.
 
 **[ChatUI (Frontend)](https://github.com/Rhabibi1609/ChatUI)**
-The companion interface for the VRAI ecosystem.
-* **Source-Mapping:** A sleek, responsive web interface that renders AI responses with interactive source citations.
-* **Real-time Feedback:** Integrated backend timing displays and model comparison views for evaluating retrieval quality.
+The companion interface for the VRAI ecosystem. with source-mapping a sleek, responsive web interface that renders AI responses with interactive source citations. with real-time feedback by integrated backend timing displays and model comparison views for evaluating retrieval quality.
 
 **[XR Intelligent Assistant](https://github.com/Rhabibi1609/UnityXRTTrainSimulator)**
-An AI-driven assistant integrated into an XR simulation environment.
-* **In-Sim Guidance:** Connects the RAG backend to an immersive environment, providing trainees with real-time, context-aware instructions.
-* **Voice-First Interaction:** Powered by natural language processing to allow hands-free procedural guidance during complex operations.
+An AI-driven assistant integrated into an XR simulation environment. Providing in-sim guidance: Connects the RAG backend to an immersive environment, providing trainees with real-time, context-aware instructions. With a voice-first interaction powered by natural language processing via Unity Sentis and ONNX to allow hands-free procedural guidance during complex operations.
 
 ### 🏎️ Data Engineering & Automation
 
 **[F1 Penalty Data ETL Pipeline](https://github.com/Rhabibi1609/End-to-End_ETL_4_formula-1-penalty-data-using-selenium-and-llms)**
-An end-to-end automated pipeline to extract and structure Formula 1 penalty data.
-* **Scraping:** Uses Selenium to navigate and extract unstructured data from official racing documents.
-* **LLM Structuring:** Leverages LLMs to parse and clean messy text into structured, analysis-ready formats.
-* **ETL Workflow:** A complete pipeline demonstrating the transition from raw web data to a structured database.
+An end-to-end automated pipeline to extract and structure Formula 1 penalty data. Scraping done by using Selenium to navigate and extract unstructured data from official racing documents. LLM Structuring leverages LLMs to parse and clean messy text into structured, analysis-ready formats. Built an ETL Workflow demonstrating the transition from raw web data to a structured database.
 
 ### 🎙️ Other AI & ML Work
 
-* **[Verdure Hackathon Winner](https://github.com/Rhabibi1609/Verdure):** A Flutter application combining machine learning, computer vision, and AR for smart gardening and plant-health analysis.
+* **[Verdure] [Exhibition Winner](https://github.com/Rhabibi1609/Verdure):** A Flutter application combining machine learning, computer vision, and AR for smart gardening and plant-health analysis.
 * **[Roman Urdu → English Translation](https://github.com/bose9999/ERUPD-dataset):** NLP research focused on dataset curation and machine translation for low-resource languages.
 
 ## 🌐 Connect With Me
