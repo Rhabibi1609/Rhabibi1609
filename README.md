@@ -14,22 +14,22 @@ I'm a graduate Computer Science student passionate about building production-gra
 ### 🚄 The VRAI Ecosystem (Virtual Railroad Assistant Instructor)
 
 **[VRAI-RAG (Backend)](https://github.com/Rhabibi1609/VRAI-RAG)**
-A high-performance RAG backend designed for railroad operations training. Implemented a hybrid search by combining Qdrant vector search with BM25 keyword retrieval using Reciprocal Rank Fusion (RRF). Ingestion Pipeline via GPU-accelerated OCR and structure-aware splitting to process complex technical manuals. Features domain-specific acronym expansion and a fallback Chain-of-Thought (CoT) reasoning loop.
+Railroad training RAG backend featuring Qdrant+BM25 hybrid search (RRF), GPU-accelerated OCR for technical manuals, domain acronym expansion, and fallback CoT.
 
 **[ChatUI (Frontend)](https://github.com/Rhabibi1609/ChatUI)**
-The companion interface for the VRAI ecosystem. with source-mapping a sleek, responsive web interface that renders AI responses with interactive source citations. with real-time feedback by integrated backend timing displays and model comparison views for evaluating retrieval quality.
+VRAI's responsive web interface offers interactive AI source citations, real-time backend metrics, and model comparison for retrieval evaluation.
 
 **[XR Intelligent Assistant](https://github.com/Rhabibi1609/UnityXRTTrainSimulator)**
-An AI-driven assistant integrated into an XR simulation environment. Providing in-sim guidance: Connects the RAG backend to an immersive environment, providing trainees with real-time, context-aware instructions. With a voice-first interaction powered by natural language processing via Unity Sentis and ONNX to allow hands-free procedural guidance during complex operations.
+XR AI assistant linking a RAG backend for real-time, in-sim guidance. Features hands-free voice interaction powered by Unity Sentis & ONNX for complex operations.
 
 ### 🏎️ Data Engineering & Automation
 
 **[F1 Penalty Data ETL Pipeline](https://github.com/Rhabibi1609/End-to-End_ETL_4_formula-1-penalty-data-using-selenium-and-llms)**
-An end-to-end automated pipeline to extract and structure Formula 1 penalty data. Scraping done by using Selenium to navigate and extract unstructured data from official racing documents. LLM Structuring leverages LLMs to parse and clean messy text into structured, analysis-ready formats. Built an ETL Workflow demonstrating the transition from raw web data to a structured database.
+End-to-end F1 penalty data ETL pipeline. Leverages Selenium to scrape unstructured racing docs and LLMs to parse text into a structured, analysis-ready database.
 
 ### 🎙️ Other AI & ML Work
 
-* **[Verdure] [Exhibition Winner](https://github.com/Rhabibi1609/Verdure):** A Flutter application combining machine learning, computer vision, and AR for smart gardening and plant-health analysis.
+* **[Exhibition Winnere] [Verdur](https://github.com/Rhabibi1609/Verdure):** A Flutter application combining machine learning, computer vision, and AR for smart gardening and plant-health analysis.
 * **[Roman Urdu → English Translation](https://github.com/bose9999/ERUPD-dataset):** NLP research focused on dataset curation and machine translation for low-resource languages.
 
 ## 🌐 Connect With Me
