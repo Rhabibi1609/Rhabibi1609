@@ -29,7 +29,7 @@ End-to-end F1 penalty data ETL pipeline. Leverages Selenium to scrape unstructur
 
 ### 🎙️ Other AI & ML Work
 
-* **[Exhibition Winnere] [Verdure](https://github.com/Rhabibi1609/Verdure):** A Flutter application combining machine learning, computer vision, and AR for smart gardening and plant-health analysis.
+* **[Exhibition Winner] [Verdure](https://github.com/Rhabibi1609/Verdure):** A Flutter application combining machine learning, computer vision, and AR for smart gardening and plant-health analysis.
 * **[Roman Urdu → English Translation](https://github.com/bose9999/ERUPD-dataset):** NLP research focused on dataset curation and machine translation for low-resource languages.
 
 ## 🌐 Connect With Me
