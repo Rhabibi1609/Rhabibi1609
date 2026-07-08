@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rayyan Habeeb — AI Systems Engineer</title>
+<meta name="description" content="Rayyan Habeeb builds production-grade AI systems: voice-first RAG pipelines, real-time retrieval, and data engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0D1524;
+  --ground-deep:#0A1120;
+  --panel:#16223A;
+  --panel-raise:#1B2A47;
+  --line:#243252;
+  --grid:rgba(93,120,170,0.07);
+  --ink:#E9EEF8;
+  --ink-dim:#93A3C0;
+  --ink-faint:#5D6E8E;
+  --gold:#FFB454;
+  --gold-dim:rgba(255,180,84,0.15);
+  --mint:#8FA8FF;
+  --mint-dim:rgba(143,168,255,0.13);
+  --green:#7ADEA0;
+  --display:'Archivo',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--display);
+  line-height:1.5;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:44px 44px;
+  display:flex;flex-direction:column;
+}
+::selection{background:var(--gold);color:var(--ground-deep)}
+a{color:var(--mint);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}
+
+/* ---------- nav ---------- */
+nav{
+  flex:0 0 auto;
+  background:var(--ground-deep);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1160px;margin:0 auto;padding:0 22px;
+  display:flex;align-items:center;justify-content:space-between;height:56px;
+}
+.nav-mark{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:0.02em}
+.nav-mark .cursor{color:var(--gold);animation:blink 1.2s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.tabs{display:flex;gap:6px}
+.tab{
+  font-family:var(--mono);font-size:12px;letter-spacing:0.05em;
+  color:var(--ink-dim);background:none;border:1px solid transparent;
+  padding:7px 14px;border-radius:5px;cursor:pointer;
+}
+.tab:hover{color:var(--gold)}
+.tab.active{color:var(--gold);background:var(--gold-dim);border-color:rgba(255,180,84,0.35)}
+@media(max-width:640px){.tab{padding:7px 9px;font-size:11px}.nav-mark{display:none}}
+
+/* ---------- stage ---------- */
+main{flex:1 1 auto;min-height:0;position:relative}
+.panel{
+  position:absolute;inset:0;
+  max-width:1160px;margin:0 auto;padding:26px 22px 20px;
+  width:100%;
+  display:none;flex-direction:column;
+  overflow:auto;scrollbar-width:thin;
+}
+.panel.active{display:flex;animation:fadein .35s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .panel.active{animation:none}
+  .nav-mark .cursor{animation:none}
+  .tbar{animation:none!important;width:var(--w)!important}
+}
+
+.sec-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:4px;display:flex;align-items:center;gap:9px;
+}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--gold)}
+h2{font-size:clamp(20px,2.6vw,28px);font-weight:800;font-stretch:108%;letter-spacing:-0.01em;margin-bottom:16px}
+
+/* ---------- HOME ---------- */
+.home-grid{
+  flex:1;display:grid;grid-template-columns:1.35fr 1fr;gap:36px;
+  align-items:center;min-height:0;
+}
+h1{
+  font-size:clamp(30px,4.6vw,56px);
+  font-weight:800;font-stretch:112%;
+  line-height:1.02;letter-spacing:-0.02em;margin-bottom:14px;
+}
+h1 .dim{color:var(--ink-faint)}
+.hero-sub{max-width:520px;font-size:clamp(13px,1.4vw,15.5px);color:var(--ink-dim);margin-bottom:10px}
+.hero-sub strong{color:var(--ink);font-weight:600}
+.hero-loc{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);margin-bottom:20px}
+.hero-loc span{color:var(--green)}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:12px;font-weight:500;
+  padding:9px 16px;border-radius:5px;display:inline-block;border:none;cursor:pointer;
+}
+.btn-solid{background:var(--gold);color:#1A1200}
+.btn-solid:hover{background:#FFC167;text-decoration:none}
+.btn-ghost{border:1px solid var(--line);color:var(--ink-dim);background:none}
+.btn-ghost:hover{border-color:var(--mint);color:var(--mint);text-decoration:none}
+
+.home-right{display:flex;flex-direction:column;gap:16px;min-height:0}
+.portrait{
+  display:flex;align-items:center;gap:16px;
+  background:var(--ground-deep);border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+}
+.portrait img{
+  width:88px;height:88px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--gold);flex-shrink:0;
+}
+.portrait .p-name{font-weight:700;font-size:15px}
+.portrait .p-role{font-family:var(--mono);font-size:11px;color:var(--mint);margin-top:2px}
+.portrait .p-note{font-size:12px;color:var(--ink-faint);margin-top:5px}
+
+/* trace */
+.trace{background:var(--ground-deep);border:1px solid var(--line);border-radius:10px;padding:16px 18px 13px}
+.trace-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--mono);font-size:10px;letter-spacing:0.08em;
+  color:var(--ink-faint);text-transform:uppercase;margin-bottom:12px;gap:8px;
+}
+.trace-total{color:var(--gold);font-weight:600;font-size:12px;text-transform:none;letter-spacing:0;white-space:nowrap}
+.trow{display:grid;grid-template-columns:104px 1fr 64px;align-items:center;gap:10px;margin-bottom:8px}
+.trow .tl{font-family:var(--mono);font-size:11px;color:var(--ink-dim);white-space:nowrap}
+.trow .tv{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);text-align:right;white-space:nowrap}
+.tbar-track{height:12px;position:relative}
+.tbar{
+  position:absolute;top:0;left:var(--off,0%);height:100%;width:0;border-radius:3px;
+  animation:grow .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s);
+}
+@keyframes grow{to{width:var(--w)}}
+.tbar.a{background:linear-gradient(90deg,#FFB454,#FF9147)}
+.tbar.b{background:linear-gradient(90deg,#8FA8FF,#6E8CFF)}
+.tbar.c{background:linear-gradient(90deg,#7ADEA0,#4EC287)}
+.trace-foot{
+  margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);
+  font-family:var(--mono);font-size:10px;color:var(--ink-faint);
+}
+.trace-foot em{font-style:normal;color:var(--ink-dim)}
+
+/* ---------- WORK ---------- */
+.xp-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;min-height:0;align-content:start}
+.xp{
+  background:var(--ground-deep);border:1px solid var(--line);border-radius:10px;
+  padding:18px;display:flex;flex-direction:column;
+}
+.xp-when{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-bottom:8px}
+.xp-when .now{color:var(--green)}
+.xp h3{font-size:15.5px;font-weight:700;line-height:1.25;margin-bottom:2px}
+.xp .org{font-size:12px;color:var(--ink-dim);margin-bottom:12px}
+.xp ul{list-style:none}
+.xp li{position:relative;padding-left:15px;margin-bottom:9px;font-size:12.5px;color:var(--ink-dim);line-height:1.45}
+.xp li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-size:10px;top:2px}
+.xp li b{color:var(--ink);font-weight:600}
+.metric{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  color:var(--gold);background:var(--gold-dim);padding:0 5px;border-radius:3px;white-space:nowrap;
+}
+
+/* ---------- PROJECTS ---------- */
+.proj-grid{
+  flex:1;display:grid;min-height:0;align-content:start;
+  grid-template-columns:repeat(3,1fr);grid-auto-rows:min-content;gap:12px;
+}
+.card{
+  background:var(--ground-deep);border:1px solid var(--line);border-radius:10px;
+  padding:15px 16px;display:flex;flex-direction:column;
+  transition:border-color .2s;
+}
+.card:hover{border-color:var(--mint)}
+.card.wide{grid-column:span 2}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+.card h3{font-size:14px;font-weight:700;line-height:1.3}
+.card h3 a{color:var(--ink)}
+.card h3 a:hover{color:var(--mint)}
+.card-kind{
+  font-family:var(--mono);font-size:9px;letter-spacing:0.09em;text-transform:uppercase;
+  color:var(--mint);background:var(--mint-dim);padding:2px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;
+}
+.card-kind.win{color:var(--gold);background:var(--gold-dim)}
+.card p{font-size:11.8px;color:var(--ink-dim);margin-bottom:9px;flex-grow:1;line-height:1.45}
+.card p b{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--mono);font-size:9.5px;color:var(--ink-faint);border:1px solid var(--line);padding:1px 6px;border-radius:3px}
+.award-card{padding:0;overflow:hidden;position:relative;min-height:150px}
+.award-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.award-cap{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(transparent, rgba(10,17,32,0.95) 55%);
+  padding:26px 12px 10px;font-family:var(--mono);font-size:10px;color:var(--ink-dim);
+}
+.award-cap b{color:var(--gold);font-weight:600}
+
+/* ---------- SKILLS ---------- */
+.skills-wrap{flex:1;display:grid;grid-template-columns:1.5fr 1fr;gap:20px;min-height:0;align-content:start}
+.skill-rows{display:flex;flex-direction:column}
+.skill-row{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:11px 0;border-top:1px solid var(--line)}
+.skill-row:first-child{border-top:none;padding-top:0}
+.skill-row .k{font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-faint);padding-top:3px}
+.skill-row .v{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  font-family:var(--mono);font-size:11px;color:var(--ink-dim);
+  background:var(--panel);border:1px solid var(--line);padding:2px 9px;border-radius:4px;
+}
+.chip.hot{color:var(--gold);border-color:rgba(255,180,84,0.4)}
+.edu-col{display:flex;flex-direction:column;gap:12px}
+.edu{background:var(--ground-deep);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.edu h3{font-size:14.5px;font-weight:700;margin-bottom:2px}
+.edu .sub{font-size:12px;color:var(--ink-dim)}
+.edu .meta{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:8px}
+.edu .meta b{color:var(--green);font-weight:600}
+
+/* ---------- CONTACT ---------- */
+.contact-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;min-height:0}
+.contact-left p{color:var(--ink-dim);max-width:460px;margin-bottom:20px;font-size:14px}
+.contact-links{display:flex;flex-wrap:wrap;gap:10px}
+.contact-photo{
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  max-height:100%;display:flex;
+}
+.contact-photo img{width:100%;height:100%;object-fit:cover;max-height:340px}
+
+footer{
+  flex:0 0 auto;
+  border-top:1px solid var(--line);background:var(--ground-deep);
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);
+}
+.foot-inner{max-width:1160px;margin:0 auto;padding:9px 22px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+
+@media(max-width:880px){
+  .home-grid,.contact-grid{grid-template-columns:1fr;gap:18px}
+  .xp-grid,.proj-grid{grid-template-columns:1fr 1fr}
+  .card.wide{grid-column:span 2}
+  .skills-wrap{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .xp-grid,.proj-grid{grid-template-columns:1fr}
+  .card.wide{grid-column:span 1}
+  .contact-photo{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">rayyan@habeeb:~$<span class="cursor">▌</span></div>
+    <div class="tabs" role="tablist" aria-label="Site sections">
+      <button class="tab active" role="tab" aria-selected="true" data-panel="home">Home</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="work">Work</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="projects">Projects</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="skills">Skills</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="contact">Contact</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HOME -->
+  <div class="panel active" id="home" role="tabpanel">
+    <div class="home-grid">
+      <div>
+        <div class="sec-label">AI Systems · Retrieval · Voice Interfaces</div>
+        <h1>Rayyan Habeeb <span class="dim">builds AI you can benchmark.</span></h1>
+        <p class="hero-sub">Graduate Research Assistant at USF's Center for Urban Transportation Research, building <strong>voice-first RAG systems</strong> where every stage of the pipeline is traced, measured, and made faster.</p>
+        <p class="hero-loc"><span>●</span> Tampa, FL — M.S. Computer Science, University of South Florida</p>
+        <div class="hero-cta">
+          <button class="btn btn-solid" data-go="projects">See the work</button>
+          <a class="btn btn-ghost" href="https://github.com/Rhabibi1609" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/rayyan-habeeb/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="home-right">
+        <div class="portrait">
+          <img src="headshot.png" alt="Portrait of Rayyan Habeeb">
+          <div>
+            <div class="p-name">Rayyan Habeeb</div>
+            <div class="p-role">AI Systems · GRA @ CUTR, USF</div>
+            <div class="p-note">Published researcher · Exhibition winner · SnowPro certified</div>
+          </div>
+        </div>
+        <div class="trace" role="img" aria-label="Latency trace of Rayyan's voice RAG pipeline: hybrid retrieval under 400 milliseconds, LLM generation 779 milliseconds at p95, 1.16 seconds end to end">
+          <div class="trace-head">
+            <span>trace: voice-query → response</span>
+            <span class="trace-total">Σ 1.16s end-to-end</span>
+          </div>
+          <div class="trow"><span class="tl">speech-to-text</span><div class="tbar-track"><div class="tbar b" style="--w:18%;--off:0%;--d:.1s"></div></div><span class="tv">async ∥</span></div>
+          <div class="trow"><span class="tl">hybrid retrieval</span><div class="tbar-track"><div class="tbar a" style="--w:24%;--off:14%;--d:.35s"></div></div><span class="tv">&lt;400ms</span></div>
+          <div class="trow"><span class="tl">llm generation</span><div class="tbar-track"><div class="tbar a" style="--w:42%;--off:34%;--d:.6s"></div></div><span class="tv">779ms p95</span></div>
+          <div class="trow"><span class="tl">text-to-speech</span><div class="tbar-track"><div class="tbar c" style="--w:20%;--off:74%;--d:.85s"></div></div><span class="tv">async ∥</span></div>
+          <div class="trace-foot">Qdrant + BM25 fused via RRF over <em>21,000+ char</em> context · p95 cut <em>35%</em> via pipeline tracing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <div class="panel" id="work" role="tabpanel">
+    <div class="sec-label">01 · Experience</div>
+    <h2>Where the numbers come from</h2>
+    <div class="xp-grid">
+      <div class="xp">
+        <div class="xp-when">Jan 2026 — <span class="now">Present</span></div>
+        <h3>Graduate Research Assistant</h3>
+        <div class="org">CUTR · University of South Florida</div>
+        <ul>
+          <li>Transportation-safety queries at <span class="metric">1.16s total latency</span> — async FastAPI parallelizing Deepgram STT/TTS with Gemini 2.5 Flash inference.</li>
+          <li><span class="metric">&lt;400ms retrieval</span> over 21,000+ char contexts via hybrid RAG: Qdrant vectors + BM25, fused with RRF.</li>
+          <li>p95 generation cut to <span class="metric">779ms (−35%)</span> with granular tracing and a concurrent multi-model eval endpoint (tokens/sec, cost-per-request).</li>
+        </ul>
+      </div>
+      <div class="xp">
+        <div class="xp-when">Sep 2025 — Dec 2025</div>
+        <h3>Student Assistant</h3>
+        <div class="org">CUTR · University of South Florida</div>
+        <ul>
+          <li>Manual review time cut <span class="metric">80%</span> at <span class="metric">91.7% accuracy</span> across 150GB of footage — automated pedestrian detection with OpenCV + PyTorch.</li>
+          <li>Processing latency down <span class="metric">40%</span> via a distributed video-analytics pipeline on Lambda triggers + Fargate clusters.</li>
+          <li>Research timelines accelerated <span class="metric">86%</span> by automating pedestrian–vehicle interaction analysis with Pandas.</li>
+        </ul>
+      </div>
+      <div class="xp">
+        <div class="xp-when">Mar 2023 — Apr 2024</div>
+        <h3>Full Stack Developer</h3>
+        <div class="org">Creative Technosoft Systems · India</div>
+        <ul>
+          <li>CRUD REST APIs in <b>ASP.NET Core</b> (C#, EF Core, SQL Server) for internal business and reporting modules.</li>
+          <li>Responsive Razor views and admin pages (Bootstrap, jQuery) across <b>2 client applications</b>.</li>
+          <li>xUnit tests + Serilog structured logging, helping QA reproduce and triage production bugs faster.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="panel" id="projects" role="tabpanel">
+    <div class="sec-label">02 · Research & Projects</div>
+    <h2>Systems, shipped</h2>
+    <div class="proj-grid">
+      <div class="card wide">
+        <div class="card-top">
+          <h3><a href="https://github.com/Rhabibi1609/VRAI-RAG" target="_blank" rel="noopener">The VRAI Ecosystem — Virtual Railroad Assistant Instructor</a></h3>
+          <span class="card-kind">RAG · XR · Voice</span>
+        </div>
+        <p>Three-part railroad training platform. <b><a href="https://github.com/Rhabibi1609/VRAI-RAG" target="_blank" rel="noopener">VRAI-RAG</a></b>: hybrid Qdrant + BM25 backend (RRF), GPU-accelerated OCR for manuals, acronym expansion, fallback chain-of-thought. <b><a href="https://github.com/Rhabibi1609/ChatUI" target="_blank" rel="noopener">ChatUI</a></b>: web UI with interactive source citations, live backend metrics, side-by-side model comparison. <b><a href="https://github.com/Rhabibi1609/UnityXRTTrainSimulator" target="_blank" rel="noopener">XR Assistant</a></b>: hands-free in-simulation voice guidance in Unity (Sentis, ONNX).</p>
+        <div class="tags"><span class="tag">Qdrant</span><span class="tag">BM25 + RRF</span><span class="tag">FastAPI</span><span class="tag">Unity Sentis</span><span class="tag">ONNX</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://arxiv.org/pdf/2412.17562" target="_blank" rel="noopener">ERUPD — Bilingual Parallel Dataset</a></h3>
+          <span class="card-kind">Published · arXiv</span>
+        </div>
+        <p>Roman Urdu ↔ English corpus: <b>75,146 sentence pairs</b>, 1.4M+ tokens, built with a hybrid synthetic pipeline (GPT-3.5, Claude Opus). MT baselines at <b>39.9 BLEU</b> via fine-tuned T5-Small and mBART; human-in-the-loop eval for code-switched data.</p>
+        <div class="tags"><span class="tag">NLP</span><span class="tag">T5 / mBART</span><span class="tag">Low-resource MT</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://github.com/Rhabibi1609/End-to-End_ETL_4_formula-1-penalty-data-using-selenium-and-llms" target="_blank" rel="noopener">F1 Penalty Data ETL Pipeline</a></h3>
+          <span class="card-kind">Data Engineering</span>
+        </div>
+        <p>Scrapes and structures <b>3,500+ FIA penalty documents</b> — Selenium for acquisition, LangChain over Gemini and Llama to normalize regulatory text into a queryable dataset.</p>
+        <div class="tags"><span class="tag">Selenium</span><span class="tag">LangChain</span><span class="tag">ETL</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://github.com/Rhabibi1609/Verdure" target="_blank" rel="noopener">Verdure</a></h3>
+          <span class="card-kind win">Exhibition Winner</span>
+        </div>
+        <p>Flutter app combining ML, computer vision, and AR for smart gardening and plant-health analysis. Point the camera at a plant; get a diagnosis.</p>
+        <div class="tags"><span class="tag">Flutter</span><span class="tag">CV</span><span class="tag">AR</span></div>
+      </div>
+      <div class="card award-card">
+        <img src="award.png" alt="Rayyan and team receiving certificates at the Innovatia project exhibition">
+        <div class="award-cap"><b>Innovatia Project Expo</b> — recognized at the exhibition, certificates in hand.</div>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://github.com/Rhabibi1609/Fairness-Aware-Logistic-Regression-Using-Demographic-Parity-and-Balance-Metrics" target="_blank" rel="noopener">Fairness-Aware Logistic Regression</a></h3>
+          <span class="card-kind">ML Research</span>
+        </div>
+        <p>Evaluating and improving ML fairness with demographic parity and balance metrics — because accuracy isn't the only number that matters.</p>
+        <div class="tags"><span class="tag">Fairness</span><span class="tag">scikit-learn</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="panel" id="skills" role="tabpanel">
+    <div class="sec-label">03 · Toolkit & Credentials</div>
+    <h2>Stack</h2>
+    <div class="skills-wrap">
+      <div class="skill-rows">
+        <div class="skill-row"><div class="k">AI / Retrieval</div><div class="v"><span class="chip hot">RAG</span><span class="chip hot">Qdrant</span><span class="chip hot">BM25</span><span class="chip">LangChain</span><span class="chip">OpenAI API</span><span class="chip">Gemini</span><span class="chip">Llama 3.2</span><span class="chip">Ollama</span><span class="chip">Deepgram</span></div></div>
+        <div class="skill-row"><div class="k">Languages</div><div class="v"><span class="chip hot">Python</span><span class="chip">C#</span><span class="chip">C</span><span class="chip">JavaScript</span><span class="chip">SQL</span></div></div>
+        <div class="skill-row"><div class="k">Cloud / Data</div><div class="v"><span class="chip">AWS Lambda</span><span class="chip">Fargate</span><span class="chip">S3</span><span class="chip">EC2</span><span class="chip">Docker</span><span class="chip">PostgreSQL</span><span class="chip">SQL Server</span><span class="chip">MongoDB</span></div></div>
+        <div class="skill-row"><div class="k">Libraries / Tools</div><div class="v"><span class="chip hot">PyTorch</span><span class="chip">OpenCV</span><span class="chip">FastAPI</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">xUnit</span><span class="chip">Serilog</span><span class="chip">Git</span><span class="chip">Linux</span></div></div>
+        <div class="skill-row"><div class="k">Web</div><div class="v"><span class="chip">ASP.NET Core</span><span class="chip">Entity Framework</span><span class="chip">React.js</span><span class="chip">Razor</span><span class="chip">REST</span></div></div>
+      </div>
+      <div class="edu-col">
+        <div class="edu">
+          <h3>M.S. Computer Science</h3>
+          <div class="sub">University of South Florida · Tampa, FL</div>
+          <div class="meta">Jan 2025 — May 2026 · GPA <b>3.90</b></div>
+        </div>
+        <div class="edu">
+          <h3>SnowPro Associate</h3>
+          <div class="sub">Platform Certification · Snowflake</div>
+          <div class="meta">Certified</div>
+        </div>
+        <div class="edu">
+          <h3>ERUPD — arXiv:2412.17562</h3>
+          <div class="sub">Published research · Bilingual parallel dataset for Roman Urdu</div>
+          <div class="meta"><a href="https://arxiv.org/pdf/2412.17562" target="_blank" rel="noopener">Read the paper ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="panel" id="contact" role="tabpanel">
+    <div class="sec-label">04 · Contact</div>
+    <h2>Let's build something measurable.</h2>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p>Open to AI engineering, ML, and data engineering roles. If you want someone who ships pipelines and then makes them faster, get in touch.</p>
+        <div class="contact-links">
+          <a class="btn btn-solid" href="mailto:rayyanhabeeb01@gmail.com">rayyanhabeeb01@gmail.com</a>
+          <a class="btn btn-ghost" href="tel:+17047802742">(704) 780-2742</a>
+          <a class="btn btn-ghost" href="https://github.com/Rhabibi1609" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/rayyan-habeeb/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="contact-photo">
+        <img src="award.png" alt="Rayyan and team receiving certificates at the Innovatia project exhibition">
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2026 Rayyan Habeeb</span>
+    <span>Tampa, FL · built for speed, like everything else</span>
+  </div>
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('.panel');
+function go(id){
+  tabs.forEach(t=>{
+    const on = t.dataset.panel === id;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', on);
+  });
+  panels.forEach(p=>p.classList.toggle('active', p.id === id));
+}
+tabs.forEach(t=>t.addEventListener('click', ()=>go(t.dataset.panel)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click', ()=>go(b.dataset.go)));
+</script>
+</body>
+</html>
